@@ -8,14 +8,14 @@ services to be called from other applications.
 <br/>
 PetStore implementation was developed using Springboot running on Java 8 and some features are very important to be said, such as:
 <br/>
-- Clean Code;
-- Simplicity;
-- Concepts Separation.
+- Clean Code
+- Simplicity
+- Concepts Separation
   - Design Patterns such as Factory and Builder are used to figure them out.
 - Dependency Injection
   - Note that all dependencies injections are provided by Guice through @Inject annotation;
 <br/>
 
 **Possible Improvements**
+- A database to store the pets
 - Adding some statistics for PetService
-- Microservices to use PetService interface
