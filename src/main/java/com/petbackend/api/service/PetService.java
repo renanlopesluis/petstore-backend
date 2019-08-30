@@ -8,7 +8,7 @@ import com.petbackend.api.model.Pet;
 
 public interface PetService {
 	
-	void addPet(Pet pet);
+	Pet save(Pet pet);
 	void remove(Pet pet);
 	List<Pet> getPets();
 	void doBath(Pet pet, BathTypeEnum bathType) throws ClassNotFoundException ;

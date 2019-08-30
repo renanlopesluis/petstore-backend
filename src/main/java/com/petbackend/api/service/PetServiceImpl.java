@@ -1,30 +1,35 @@
 package com.petbackend.api.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.petbackend.api.enums.BathTypeEnum;
 import com.petbackend.api.enums.HairTypeEnum;
 import com.petbackend.api.factory.BathFactory;
 import com.petbackend.api.factory.HairCareFactory;
 import com.petbackend.api.model.Pet;
+import com.petbackend.api.repository.PetRepository;
 
+@Service
+@Qualifier("petServiceImpl")
 public class PetServiceImpl implements PetService{
+			
+	private BasicService service;
 	
+	@Autowired
+	private PetRepository repository;
 	
-	private List<Pet> pets = new ArrayList<Pet>();
-	
-	private Service service;
-
 	@Override
-	public void addPet(Pet pet) {
-		pets.add(pet);
+	public Pet save(Pet pet) {
+		return repository.save(pet);
 	}
 
 	@Override
 	public void remove(Pet pet) {
-		pets.remove(pet);	
+		repository.delete(pet);	
 	}
 
 	@Override
@@ -41,13 +46,12 @@ public class PetServiceImpl implements PetService{
 
 	@Override
 	public List<Pet> searchByAge(Integer age) {
-		return pets.stream().filter(p->
-			p.getAge().equals(age)).collect(Collectors.toList());
+		return repository.findByAge(age);
 	}
 
 	@Override
 	public List<Pet> getPets() {
-		return this.pets;
+		return repository.findAll();
 	}
 
 }

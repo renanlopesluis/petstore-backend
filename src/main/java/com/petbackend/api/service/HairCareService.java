@@ -1,5 +1,5 @@
 package com.petbackend.api.service;
 
-public abstract class HairCareService implements Service{
+public abstract class HairCareService implements BasicService{
 
 }
