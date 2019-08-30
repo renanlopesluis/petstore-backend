@@ -2,7 +2,7 @@
 A Simple Rest Api using Springboot and Guice
 
 This project has aims to give someone a simple notion of Google Guice and some Design Patterns and also to provide simple 
-services to be called by another application.
+services to be called from other applications.
 
 **Features**
 <br/>
