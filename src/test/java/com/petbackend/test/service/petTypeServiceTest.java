@@ -4,25 +4,28 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.petbackend.api.builder.PetTypeBuilder;
 import com.petbackend.api.model.PetType;
-import com.petbackend.api.service.PetTypeService;
+import com.petbackend.api.repository.PetTypeRepository;
+import com.petbackend.test.dataprovider.PetTypeDataProvider;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@RunWith(SpringRunner.class)
+@DataJpaTest
+@EnableJpaRepositories(basePackageClasses = PetTypeRepository.class)
+@EntityScan(basePackageClasses = PetType.class)
 public class petTypeServiceTest {
 	
 	@Autowired
-	@Qualifier("petTypeServiceImpl")
-	PetTypeService petTypeService;
+	PetTypeDataProvider dataProvider;
 
 	@Test
 	public void shouldSaveAPetType() {
-		PetType type = petTypeService.save(PetTypeBuilder.build(null, "Dog"));
-		Assert.assertNotNull(type.getId());
+	PetType petType = dataProvider.build();
+		Assert.assertNotNull(petType);
+		Assert.assertNotNull(petType.getId());
 	}
 }
