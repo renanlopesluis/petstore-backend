@@ -26,6 +26,11 @@ public class PetServiceImpl implements PetService{
 	public Pet save(Pet pet) {
 		return repository.save(pet);
 	}
+	
+	@Override
+	public Pet findById(Long id) {
+		return repository.findById(id).get();
+	}
 
 	@Override
 	public void remove(Pet pet) {
@@ -53,5 +58,4 @@ public class PetServiceImpl implements PetService{
 	public List<Pet> getPets() {
 		return repository.findAll();
 	}
-
 }
