@@ -16,9 +16,7 @@ import com.petbackend.api.repository.PetRepository;
 @Service
 @Qualifier("petServiceImpl")
 public class PetServiceImpl implements PetService{
-			
-	private BasicService service;
-	
+				
 	@Autowired
 	private PetRepository repository;
 	
@@ -39,14 +37,12 @@ public class PetServiceImpl implements PetService{
 
 	@Override
 	public void doBath(Pet pet, BathTypeEnum bathType) throws ClassNotFoundException {
-		service = BathFactory.getInstance(bathType);
-		service.execute(pet);
+		BathFactory.getInstance(bathType).execute(pet);
 	}
 	
 	@Override
 	public void doHair(Pet pet, HairTypeEnum hairType) throws ClassNotFoundException {
-		service = HairCareFactory.getInstance(hairType);
-		service.execute(pet);
+		HairCareFactory.getInstance(hairType).execute(pet);
 	}
 
 	@Override
