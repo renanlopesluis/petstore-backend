@@ -50,8 +50,8 @@ public class PetController {
 	}
 
 	@RequestMapping(value = "pet", method = RequestMethod.POST)
-	public @ResponseBody Pet addPet(@Valid @RequestBody Pet pet) {
-		return service.save(pet);
+	public @ResponseBody PetDTO addPet(@Valid @RequestBody Pet pet) {
+		return converter.convert(service.save(pet));
 	}
 
 	@RequestMapping(value = "bath", method = RequestMethod.PUT, 
@@ -64,7 +64,7 @@ public class PetController {
 			BathTypeEnum bathType = BathTypeEnum.getByCode(bathCode).get();
 			service.doBath(pet, bathType);
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(new PetServiceDTO("The pet "+pet.getName()+" has had an awesome " + bathType.getDescription() + "!"));
+					.body(new PetServiceDTO("The pet "+pet.getName()+" has had an awesome " + bathType.getDescription().toLowerCase() + "!"));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
@@ -79,7 +79,7 @@ public class PetController {
 			HairTypeEnum hairType = HairTypeEnum.getByCode(hairCode).get();
 			service.doHair(pet, hairType);
 			return ResponseEntity.status(HttpStatus.OK)
-					.body(new PetServiceDTO("he pet "+pet.getName()+" has had its " +hairType.getDescription() + " cut!"));
+					.body(new PetServiceDTO("The pet "+pet.getName()+" has had its " +hairType.getDescription().toLowerCase() + " cut!"));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
