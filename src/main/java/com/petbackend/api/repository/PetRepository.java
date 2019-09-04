@@ -11,5 +11,5 @@ import com.petbackend.api.model.Pet;
 public interface PetRepository extends JpaRepository<Pet, Long>{
 
 	List<Pet> findByAge(Integer age);
-	List<Pet> findByNameIgnoreCase(String name);
+	List<Pet> findByNameContaining(String name);
 }

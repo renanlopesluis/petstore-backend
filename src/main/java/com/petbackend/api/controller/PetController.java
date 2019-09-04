@@ -57,7 +57,7 @@ public class PetController {
 	@RequestMapping(value = "pet", method = RequestMethod.GET)
 	public @ResponseBody List<PetDTO> findPetByName(@RequestParam("name") String name) {
 		try {
-			return converter.convert(service.findByNameIgnoreCase(name));
+			return converter.convert(service.findByName(name));
 		}catch(IllegalArgumentException iae){
 			return new ArrayList<>();
 		}
