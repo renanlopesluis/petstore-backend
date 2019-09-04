@@ -54,4 +54,9 @@ public class PetServiceImpl implements PetService{
 	public List<Pet> getPets() {
 		return repository.findAll();
 	}
+
+	@Override
+	public List<Pet> findByNameIgnoreCase(String name) {
+		return repository.findByNameIgnoreCase(name);
+	}
 }

@@ -40,7 +40,7 @@ public class PetController {
 	@Qualifier("petDTOConverter")
 	private Converter<Pet, PetDTO> converter;
 
-	@RequestMapping(value = "pet", method = RequestMethod.GET)
+	@RequestMapping(value = "pets", method = RequestMethod.GET)
 	public @ResponseBody List<PetDTO> retrieveAllPets() {
 		try {
 			return converter.convert(service.getPets());
@@ -50,8 +50,17 @@ public class PetController {
 	}
 
 	@RequestMapping(value = "pet", method = RequestMethod.POST)
-	public @ResponseBody PetDTO addPet(@Valid @RequestBody Pet pet) {
+	public @ResponseBody PetDTO savePet(@Valid @RequestBody Pet pet) {
 		return converter.convert(service.save(pet));
+	}
+	
+	@RequestMapping(value = "pet", method = RequestMethod.GET)
+	public @ResponseBody List<PetDTO> findPetByName(@RequestParam("name") String name) {
+		try {
+			return converter.convert(service.findByNameIgnoreCase(name));
+		}catch(IllegalArgumentException iae){
+			return new ArrayList<>();
+		}
 	}
 
 	@RequestMapping(value = "bath", method = RequestMethod.PUT, 
