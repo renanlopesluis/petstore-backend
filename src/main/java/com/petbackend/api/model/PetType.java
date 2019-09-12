@@ -26,7 +26,7 @@ public class PetType implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	@NotEmpty
 	private String description;
 	

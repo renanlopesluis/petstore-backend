@@ -1,6 +1,7 @@
 package com.petbackend.api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,5 +30,10 @@ public class PetTypeServiceImpl implements PetTypeService {
 	@Override
 	public List<PetType> getPetTypes() {
 		return repository.findAll();
+	}
+
+	@Override
+	public Optional<PetType>  findById(Long id) {
+		return this.repository.findById(id);
 	}	
 }

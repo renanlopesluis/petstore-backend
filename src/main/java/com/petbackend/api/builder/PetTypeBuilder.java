@@ -7,7 +7,7 @@ import com.petbackend.api.model.PetType;
 @Component
 public class PetTypeBuilder {
 
-	public static PetType build(Integer id, String description) {
+	public static PetType build(Long id, String description) {
 		return PetType.builder().id(id).description(description).build();
 	}
 }

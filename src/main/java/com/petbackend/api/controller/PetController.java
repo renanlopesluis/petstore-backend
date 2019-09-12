@@ -69,7 +69,7 @@ public class PetController {
 	public ResponseEntity<?> doBath(@RequestParam("petId") Long petId,
 			@RequestParam("bathCode") Integer bathCode) {
 		try {
-			Pet pet = service.findById(petId);
+			Pet pet = service.findById(petId).get();
 			BathTypeEnum bathType = BathTypeEnum.getByCode(bathCode).get();
 			service.doBath(pet, bathType);
 			return ResponseEntity.status(HttpStatus.OK)
@@ -84,7 +84,7 @@ public class PetController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> doHair(@RequestParam("petId") Long petId, @RequestParam("hairCode") Integer hairCode) {
 		try {
-			Pet pet = service.findById(petId);
+			Pet pet = service.findById(petId).get();
 			HairTypeEnum hairType = HairTypeEnum.getByCode(hairCode).get();
 			service.doHair(pet, hairType);
 			return ResponseEntity.status(HttpStatus.OK)
