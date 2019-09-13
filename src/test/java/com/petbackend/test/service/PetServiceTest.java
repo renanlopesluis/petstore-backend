@@ -1,5 +1,6 @@
 package com.petbackend.test.service;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,10 +31,14 @@ public class PetServiceTest {
 	@Autowired
 	private PetDataProvider dataProvider;
 	
-
 	@Before
 	public void setUp() {
 		dataProvider.cleanAll();
+	}
+	
+	@After
+	public void clear() {
+		setUp();
 	}
 
 	@Test

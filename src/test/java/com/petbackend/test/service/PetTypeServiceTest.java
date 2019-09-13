@@ -3,6 +3,7 @@ package com.petbackend.test.service;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +35,11 @@ public class PetTypeServiceTest {
 	@Before
 	public void setUp() {
 		dataProvider.cleanAll();
+	}
+	
+	@After
+	public void clear() {
+		setUp();
 	}
 		
 	@Test
