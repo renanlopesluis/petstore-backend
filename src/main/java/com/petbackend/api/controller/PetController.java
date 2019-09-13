@@ -54,6 +54,17 @@ public class PetController {
 		return converter.convert(service.save(pet));
 	}
 	
+	@RequestMapping(value = "pet", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deletePet(@RequestParam("id") Long id) {
+		try {
+			service.remove(id);
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new PetServiceDTO("Pet successfully removed!"));
+		}catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
 	@RequestMapping(value = "pet", method = RequestMethod.GET)
 	public @ResponseBody List<PetDTO> findPetByName(@RequestParam("name") String name) {
 		try {

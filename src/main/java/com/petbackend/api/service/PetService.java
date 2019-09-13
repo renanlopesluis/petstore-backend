@@ -12,7 +12,7 @@ public interface PetService {
 	Pet save(Pet pet);
 	Optional<Pet> findById(Long id);
 	List<Pet> findByName(String name);
-	void remove(Pet pet);
+	void remove(Long id);
 	List<Pet> getPets();
 	void doBath(Pet pet, BathTypeEnum bathType) throws ClassNotFoundException ;
 	void doHair(Pet pet, HairTypeEnum hairType)throws ClassNotFoundException;

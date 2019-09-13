@@ -76,7 +76,7 @@ public class PetServiceTest {
 	@Test
 	public void shouldRemoveAPet(){
 		Pet pet = dataProvider.build();
-		service.remove(pet);
+		service.remove(pet.getId());
 		Assert.assertEquals(service.findById(pet.getId()).isPresent(), false);	
 	}
 	
