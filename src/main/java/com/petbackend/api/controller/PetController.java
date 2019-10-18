@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.petbackend.api.converter.Converter;
 import com.petbackend.api.dto.PetDTO;
 import com.petbackend.api.dto.PetServiceDTO;
+import com.petbackend.api.dto.PetServiceRequestBodyDTO;
 import com.petbackend.api.enums.BathTypeEnum;
 import com.petbackend.api.enums.HairTypeEnum;
 import com.petbackend.api.model.Pet;
@@ -66,6 +67,15 @@ public class PetController {
 	}
 	
 	@RequestMapping(value = "pet", method = RequestMethod.GET)
+	public ResponseEntity<PetDTO> findPetById(@RequestParam("id") Long id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(converter.convert(service.findById(id).get()));
+		}catch(IllegalArgumentException e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+	
+	@RequestMapping(value = "searchPet", method = RequestMethod.GET)
 	public @ResponseBody List<PetDTO> findPetByName(@RequestParam("name") String name) {
 		try {
 			return converter.convert(service.findByName(name));
@@ -75,13 +85,12 @@ public class PetController {
 	}
 
 	@RequestMapping(value = "bath", method = RequestMethod.PUT, 
-			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, 
+			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> doBath(@RequestParam("petId") Long petId,
-			@RequestParam("bathCode") Integer bathCode) {
+	public ResponseEntity<?> doBath(@RequestBody PetServiceRequestBodyDTO requestBody) {
 		try {
-			Pet pet = service.findById(petId).get();
-			BathTypeEnum bathType = BathTypeEnum.getByCode(bathCode).get();
+			Pet pet = service.findById(requestBody.getPetId()).get();
+			BathTypeEnum bathType = BathTypeEnum.getByCode(requestBody.getServiceCode()).get();
 			service.doBath(pet, bathType);
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(new PetServiceDTO("The pet "+pet.getName()+" has had an awesome " + bathType.getDescription().toLowerCase() + "!"));
@@ -90,13 +99,13 @@ public class PetController {
 		}
 	}
 
-	@RequestMapping(value = "hair", method = RequestMethod.PUT, 
-			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, 
+	@RequestMapping(value = "hair", method = RequestMethod.PUT,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> doHair(@RequestParam("petId") Long petId, @RequestParam("hairCode") Integer hairCode) {
+	public ResponseEntity<?> doHair(@RequestBody PetServiceRequestBodyDTO requestBody) {
 		try {
-			Pet pet = service.findById(petId).get();
-			HairTypeEnum hairType = HairTypeEnum.getByCode(hairCode).get();
+			Pet pet = service.findById(requestBody.getPetId()).get();
+			HairTypeEnum hairType = HairTypeEnum.getByCode(requestBody.getServiceCode()).get();
 			service.doHair(pet, hairType);
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(new PetServiceDTO("The pet "+pet.getName()+" has had its " +hairType.getDescription().toLowerCase() + " cut!"));
