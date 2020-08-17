@@ -1,4 +1,4 @@
-package com.petbackend.api.factory;
+package com.petbackend.api.strategy;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import com.petbackend.api.service.LongHairCareService;
 import com.petbackend.api.service.ShortHairCareService;
 
 @Component
-public class HairCareFactory {
+public class HairCareStrategy {
 	
 	public static BasicService getInstance(HairTypeEnum hairType) throws ClassNotFoundException{
 		switch(hairType) {

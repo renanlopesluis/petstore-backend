@@ -1,4 +1,4 @@
-package com.petbackend.api.factory;
+package com.petbackend.api.strategy;
 
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import com.petbackend.api.service.PerfumelessBathService;
 import com.petbackend.api.service.WaterBathService;
 
 @Component
-public class BathFactory {
+public class BathStrategy {
 
 	public static BasicService getInstance(BathTypeEnum bathType) throws ClassNotFoundException{
 		switch(bathType) {

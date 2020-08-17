@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.petbackend.api.enums.BathTypeEnum;
 import com.petbackend.api.enums.HairTypeEnum;
-import com.petbackend.api.factory.BathFactory;
-import com.petbackend.api.factory.HairCareFactory;
+import com.petbackend.api.strategy.BathStrategy;
+import com.petbackend.api.strategy.HairCareStrategy;
 import com.petbackend.api.service.BasicService;
 import com.petbackend.api.service.DryBathService;
 import com.petbackend.api.service.LongHairCareService;
@@ -42,41 +42,41 @@ public class BasicServiceTest {
 	
 	@Test
 	public void shouldInstantiateWaterBathService() throws ClassNotFoundException{
-		service = BathFactory.getInstance(BathTypeEnum.WATER);
+		service = BathStrategy.getInstance(BathTypeEnum.WATER);
 		
 		Assert.assertEquals(service.isClass(WaterBathService.class), true);		
 	}
 	
 	@Test
 	public void shouldInstantiateDryBathService() throws ClassNotFoundException{
-		service = BathFactory.getInstance(BathTypeEnum.DRY);
+		service = BathStrategy.getInstance(BathTypeEnum.DRY);
 		
 		Assert.assertEquals(service.isClass(DryBathService.class), true);		
 	}
 	
 	@Test
 	public void shouldInstantiatePerfumefulBathService() throws ClassNotFoundException{
-		service = BathFactory.getInstance(BathTypeEnum.PERFUMEFUL);
+		service = BathStrategy.getInstance(BathTypeEnum.PERFUMEFUL);
 		
 		Assert.assertEquals(service.isClass(PerfumefulBathService.class), true);		
 	}
 	
 	@Test
 	public void shouldInstantiatePerfumelessBathService() throws ClassNotFoundException{
-		service = BathFactory.getInstance(BathTypeEnum.PERFUMELESS);
+		service = BathStrategy.getInstance(BathTypeEnum.PERFUMELESS);
 		
 		Assert.assertEquals(service.isClass(PerfumelessBathService.class), true);		
 	}
 	
 	@Test
 	public void shouldInstantiateLongHairService() throws ClassNotFoundException{
-		service = HairCareFactory.getInstance(HairTypeEnum.LONG);
+		service = HairCareStrategy.getInstance(HairTypeEnum.LONG);
 		
 		Assert.assertEquals(service.isClass(LongHairCareService.class), true);		
 	}
 	@Test
 	public void shouldInstantiateShortHairService() throws ClassNotFoundException{
-		service = HairCareFactory.getInstance(HairTypeEnum.SHORT);
+		service = HairCareStrategy.getInstance(HairTypeEnum.SHORT);
 		
 		Assert.assertEquals(service.isClass(ShortHairCareService.class), true);		
 	}

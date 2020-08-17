@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.petbackend.api.enums.BathTypeEnum;
 import com.petbackend.api.enums.HairTypeEnum;
-import com.petbackend.api.factory.BathFactory;
-import com.petbackend.api.factory.HairCareFactory;
+import com.petbackend.api.strategy.BathStrategy;
+import com.petbackend.api.strategy.HairCareStrategy;
 import com.petbackend.api.model.Pet;
 import com.petbackend.api.repository.PetRepository;
 
@@ -38,12 +38,12 @@ public class PetServiceImpl implements PetService{
 
 	@Override
 	public void doBath(Pet pet, BathTypeEnum bathType) throws ClassNotFoundException {
-		BathFactory.getInstance(bathType).execute(pet);
+		BathStrategy.getInstance(bathType).execute(pet);
 	}
 	
 	@Override
 	public void doHair(Pet pet, HairTypeEnum hairType) throws ClassNotFoundException {
-		HairCareFactory.getInstance(hairType).execute(pet);
+		HairCareStrategy.getInstance(hairType).execute(pet);
 	}
 
 	@Override
